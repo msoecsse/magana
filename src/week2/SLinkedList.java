@@ -53,6 +53,7 @@ public class SLinkedList <E> {//implements List<E> {
             s+= cur.data + "-->";
             cur = cur.next;
         }
+        s+="null";
         return s;
     }
 
