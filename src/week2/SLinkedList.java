@@ -89,23 +89,47 @@ public class SLinkedList <E> {//implements List<E> {
         return s;
     }
 
-    // group 1 TODO test
+    // group 1 TODO we tested most functionality, but need to be updating tail reference and size consitantly
     public boolean add (int i, E element){
-        Node cur = head;
-        Node toBeAdded = null;
-        toBeAdded.data =element;
-        Node rightBeforeToBeAdded = null;
+    // head, tail, and size all have to be updated
+        Node toBeAdded = new Node(element, null);
+ //       toBeAdded.data =element;
+        Node rightBeforeToBeAdded = head;
+        if (i ==0) {
+
+            if (rightBeforeToBeAdded == null) {
+                head = toBeAdded;
+
+            } else {
+                toBeAdded.next = head;
+                head = toBeAdded;
+
+            }
+            size++;
+            return true;
+        }
+        if (rightBeforeToBeAdded == null && i != 0){
+            return false;
+        }
         int index = 0;
         boolean found = false; // change this variable name
-        while (cur!=null && !found){
-            if (index == i){
+        //Node cur = head;
+        while (rightBeforeToBeAdded.next!=null && !found){
+            if (index == i-1){
                 found = true;
+                //rightBeforeToBeAdded.next is point to th enode after
                 toBeAdded.next = rightBeforeToBeAdded.next;
                 rightBeforeToBeAdded.next = toBeAdded;
+
+                return true;
             }
-            index ++;
+            else {
+                rightBeforeToBeAdded = rightBeforeToBeAdded.next;
+
+                index++;
+            }
         }
-        return found; // JCM
+        return false; // JCM
     }
 
     // group 2 TODO test
