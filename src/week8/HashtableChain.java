@@ -29,6 +29,15 @@ public class HashtableChain<K, V>
     /** The maximum load factor */
     private static final double LOAD_THRESHOLD = 3.0;
 
+    public static int whatIsTheHashCode(Integer key) {
+        return key.hashCode();
+
+    }
+
+    public double currentLoadFactor() {
+        return (double)size()/table.length;
+    }
+
     /*<listing chapter="7" number="3">*/
     // Note this is equivalent to java.util.AbstractMap.SimpleEntry
     /** Contains key-value pairs for a hash table. 
@@ -186,12 +195,15 @@ public class HashtableChain<K, V>
 
     /* original toString */
         public String toString() {
-        StringJoiner sj = new StringJoiner(", ", "{", "}");
+        StringJoiner sj = new StringJoiner("", "{", "}");
+       int i=0;
         for (List<Entry<K, V>> cell : table) {
             if (cell != null) {
                // cell.forEach(e -> sj.add(e.toString()));
+                sj.add(" i="+i+":");
                 sj.add(cell.toString());
             }
+            i++;
         }
         return sj.toString();
     }
